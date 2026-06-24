@@ -1,0 +1,438 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* New Leaf design tokens — warm, hopeful, trustworthy */
+
+    /* Brand palette */
+    --leaf-forest:  152 42% 27%;   /* deep forest green — primary brand */
+    --leaf-sage:    152 35% 42%;   /* medium sage — hover states */
+    --leaf-mist:    152 25% 92%;   /* soft sage tint — AI message bg */
+    --leaf-amber:   37 88% 55%;    /* warm amber — CTAs, warmth */
+    --leaf-amber-d: 32 82% 46%;    /* darker amber — hover */
+    --leaf-ivory:   42 40% 97%;    /* warm ivory — page background */
+    --leaf-ivory-d: 40 28% 93%;    /* slightly darker ivory — cards */
+    --leaf-crimson: 4 70% 52%;     /* emergency red — crisis hotlines */
+    --leaf-sky:     207 75% 52%;   /* info blue */
+
+    /* Semantic tokens */
+    --background:         42 40% 97%;
+    --foreground:         220 25% 12%;
+
+    --card:               0 0% 100%;
+    --card-foreground:    220 25% 12%;
+
+    --popover:            0 0% 100%;
+    --popover-foreground: 220 25% 12%;
+
+    --primary:            152 42% 27%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:          152 20% 93%;
+    --secondary-foreground: 152 42% 22%;
+
+    --muted:              152 12% 94%;
+    --muted-foreground:   220 10% 46%;
+
+    --accent:             37 88% 55%;
+    --accent-foreground:  220 25% 12%;
+
+    --destructive:        4 70% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border:             152 15% 88%;
+    --input:              152 12% 92%;
+    --ring:               152 42% 27%;
+
+    --radius: 0.625rem;
+
+    /* Sidebar tokens (unused but needed by shadcn) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Dark mode — richer, still warm */
+  .dark {
+    --background:   220 28% 8%;
+    --foreground:   152 8% 92%;
+
+    --card:         220 25% 11%;
+    --card-foreground: 152 8% 92%;
+
+    --popover:      220 25% 10%;
+    --popover-foreground: 152 8% 92%;
+
+    --primary:      152 48% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:    220 18% 16%;
+    --secondary-foreground: 152 8% 85%;
+
+    --muted:        220 15% 14%;
+    --muted-foreground: 220 10% 58%;
+
+    --accent:       37 80% 52%;
+    --accent-foreground: 220 25% 10%;
+
+    --destructive:  4 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border:       220 15% 18%;
+    --input:        220 15% 16%;
+    --ring:         152 48% 48%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* ── Surface utilities ──────────────────────────────────────────────────── */
+
+.soft-grid-bg {
+  background-image:
+    radial-gradient(circle at 20% 10%, hsl(152 30% 88% / 0.3), transparent 32%),
+    radial-gradient(circle at 80% 20%, hsl(37 70% 85% / 0.2), transparent 28%),
+    radial-gradient(circle at 40% 90%, hsl(152 20% 90% / 0.2), transparent 34%);
+}
+
+.glass-panel {
+  background: hsl(0 0% 100% / 0.76);
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Keep anchor-linked sections clear of the sticky header */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  *:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-dm-sans), var(--font-fredoka), ui-sans-serif, system-ui, sans-serif;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-fredoka), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+  }
+}
+
+/* ── Global scrollbar (refined, brand-tinted) ───────────────────────────── */
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(152 20% 82%);
+  border-radius: 999px;
+  border: 2px solid hsl(var(--background));
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(152 25% 70%); }
+
+/* ── Chat message prose ─────────────────────────────────────────────────── */
+
+.chat-prose h2 {
+  font-family: var(--font-fredoka), ui-sans-serif, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: hsl(var(--leaf-forest));
+  margin: 1.25rem 0 0.4rem;
+  letter-spacing: -0.01em;
+}
+.chat-prose h3 {
+  font-family: var(--font-fredoka), ui-sans-serif, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: hsl(var(--leaf-sage));
+  margin: 0.9rem 0 0.25rem;
+}
+.chat-prose p {
+  margin: 0.35rem 0;
+  line-height: 1.65;
+  font-size: 0.9375rem;
+}
+.chat-prose ul,
+.chat-prose ol {
+  margin: 0.4rem 0 0.6rem 1.1rem;
+}
+.chat-prose li {
+  margin: 0.2rem 0;
+  line-height: 1.6;
+  font-size: 0.9375rem;
+}
+.chat-prose strong {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+.chat-prose em {
+  color: hsl(var(--muted-foreground));
+}
+.chat-prose hr {
+  border-color: hsl(var(--border));
+  margin: 0.8rem 0;
+}
+.chat-prose h2:first-child {
+  margin-top: 0;
+}
+
+/* ── Leaf animations ────────────────────────────────────────────────────── */
+
+@keyframes leaf-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%       { transform: translateY(-6px) rotate(2deg); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes typing-dot {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.4; }
+  40%           { transform: scale(1.1); opacity: 1; }
+}
+
+.leaf-float       { animation: leaf-float 4s ease-in-out infinite; }
+.animate-fade-up  { animation: fade-up 0.5s ease-out both; }
+.animate-fade-in  { animation: fade-in 0.4s ease-out both; }
+.animate-slide-right { animation: slide-in-right 0.4s ease-out both; }
+.animate-slide-left  { animation: slide-in-left 0.4s ease-out both; }
+
+.typing-dot:nth-child(1) { animation: typing-dot 1.2s 0.0s infinite; }
+.typing-dot:nth-child(2) { animation: typing-dot 1.2s 0.2s infinite; }
+.typing-dot:nth-child(3) { animation: typing-dot 1.2s 0.4s infinite; }
+
+/* ── Delay utilities ────────────────────────────────────────────────────── */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ── Category card hover ────────────────────────────────────────────────── */
+.category-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -8px hsl(152 42% 27% / 0.18);
+}
+
+/* ── Scrollbar styling ──────────────────────────────────────────────────── */
+.chat-scroll::-webkit-scrollbar { width: 6px; }
+.chat-scroll::-webkit-scrollbar-track { background: transparent; }
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: hsl(152 15% 80%);
+  border-radius: 3px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .leaf-float,
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-slide-right,
+  .animate-slide-left { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Scroll reveal (used by the <Reveal> component) ─────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Hover lift, generalized ────────────────────────────────────────────── */
+.lift-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.lift-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -14px hsl(152 42% 27% / 0.22);
+}
+
+/* ── Button shine sweep ─────────────────────────────────────────────────── */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, hsl(0 0% 100% / 0.35) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.btn-shine:hover::after { transform: translateX(120%); }
+
+/* ── Pulsing status / urgency dot ───────────────────────────────────────── */
+.pulse-dot { position: relative; display: inline-flex; }
+.pulse-dot::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.45;
+  animation: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.65); opacity: 0.55; }
+  70%  { transform: scale(2); opacity: 0; }
+  100% { transform: scale(2); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot::before { animation: none; opacity: 0.3; }
+}
+
+/* ── Streaming text cursor ──────────────────────────────────────────────── */
+.stream-cursor::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: hsl(var(--leaf-forest));
+  animation: cursor-blink 0.9s steps(1) infinite;
+}
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
+
+/* ── Smooth collapsible (grid-rows trick, no JS height math) ───────────── */
+.collapsible-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.collapsible-grid.is-open { grid-template-rows: 1fr; }
+.collapsible-grid > div { overflow: hidden; min-height: 0; }
+
+/* ── Scroll progress bar ────────────────────────────────────────────────── */
+.scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 60;
+  background: transparent;
+  pointer-events: none;
+}
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, hsl(var(--leaf-amber)), hsl(var(--leaf-forest)));
+  transform-origin: left;
+  transition: width 0.12s linear;
+}
+
+/* ── Animated underline for nav links ───────────────────────────────────── */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: hsl(var(--leaf-forest));
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ── Marquee for the trust strip ────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+.marquee-row:hover .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ── Animated gradient backdrop for dark sections ───────────────────────── */
+.aurora-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora-bg span {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(60px);
+  opacity: 0.35;
+  animation: aurora-drift 16s ease-in-out infinite;
+}
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(20px, -24px) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora-bg span { animation: none; }
+}
