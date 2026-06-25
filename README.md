@@ -1,7 +1,6 @@
-````md
 # New Leaf
 
-**Youth Code x AI Hackathon 2026 — Track 03: AI That Actually Helps People**  
+**Youth Code x AI Hackathon 2026 — Track 03: AI That Actually Helps People**
 **Team:** Spurs In 6
 
 ## What It Is
@@ -10,7 +9,7 @@ New Leaf is a conversational AI application that helps people in crisis find sup
 
 Users can also be redirected toward government programs, official hotlines, nonprofit organizations, and other trusted community partners.
 
-**One-line pitch:**  
+**One-line pitch:**
 An AI-powered solution that helps people in crisis access community support services and get personalized guidance so they can get help faster and advocate for themselves.
 
 ## The Problem
@@ -33,15 +32,15 @@ AI is useful for this problem because people do not always describe their needs 
 
 New Leaf uses AI to understand a person’s real situation, match them with relevant support categories, explain eligibility in simple language, and generate a step-by-step action plan.
 
-**AI capabilities used:**  
+**AI capabilities used:**
 Natural Language Processing · Recommendation Systems · Personalized Guidance
 
 ## Responsible AI
 
-**Risk:**  
+**Risk:**
 The application may recommend incorrect, outdated, or irrelevant community resources. It may also fail to recognize urgent situations where immediate human assistance is needed, potentially delaying critical help for vulnerable users.
 
-**How we reduce it:**  
+**How we reduce it:**
 We use verified and regularly updated resource databases whenever possible. When information is limited or uncertain, the application clearly labels that uncertainty instead of presenting the answer as guaranteed. For urgent situations, New Leaf prioritizes official hotlines, emergency services, and human support instead of relying only on AI-generated guidance.
 
 We also hope to work with government agencies, nonprofits, and trusted community organizations so that they can help vet resources and improve reliability.
@@ -57,7 +56,4 @@ The AI does not replace social workers, government agencies, emergency services,
 ```bash
 npm install
 npm run dev
-````
-
-```
 ```
