@@ -111,15 +111,4 @@ The AI does not replace social workers, government agencies, emergency services,
 ```bash
 npm install
 npm run dev
-````
-
-```
-```
-
-npm install
-npm run dev
-````
-
-```
-```
 
